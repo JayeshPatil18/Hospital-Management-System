@@ -93,7 +93,11 @@ public class Login extends JFrame {
 		btnClose.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnClose.setBounds(493, 292, 100, 34);
 		contentPane.add(btnClose);
-		btnClose.addActionListener(null);
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
 		
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.setForeground(new Color(255, 255, 255));
