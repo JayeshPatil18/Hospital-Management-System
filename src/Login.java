@@ -87,6 +87,7 @@ public class Login extends JFrame {
 					if(password.getText().equals("admin")) {
 //						JOptionPane.showConfirmDialog(null, "Logged", "SELECT", JOptionPane.ERROR_MESSAGE);
 						setVisible(false);
+						new Home().setVisible(true);
 					}else {
 						JOptionPane.showConfirmDialog(null, "Wrong Password", "SELECT", JOptionPane.ERROR_MESSAGE);
 					}

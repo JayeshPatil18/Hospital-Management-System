@@ -56,7 +56,7 @@ public class Home extends JFrame {
 		contentPane.add(contentPane_1);
 		
 		JButton btnNewButton = new JButton("Add Patient");
-		btnNewButton.setForeground(new Color(0, 0, 0));
+		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.addActionListener(new ActionListener() {
@@ -68,21 +68,21 @@ public class Home extends JFrame {
 		contentPane_1.add(btnNewButton);
 		
 		JButton btnAddDiagno = new JButton("Add Diagnosis");
-		btnAddDiagno.setForeground(new Color(0, 0, 0));
+		btnAddDiagno.setForeground(new Color(255, 255, 255));
 		btnAddDiagno.setBackground(new Color(0, 0, 0));
 		btnAddDiagno.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAddDiagno.setBounds(40, 153, 300, 60);
 		contentPane_1.add(btnAddDiagno);
 		
 		JButton btnNewButton_1_1 = new JButton("Update Patient Record");
-		btnNewButton_1_1.setForeground(new Color(0, 0, 0));
+		btnNewButton_1_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1_1.setBackground(new Color(0, 0, 0));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton_1_1.setBounds(40, 370, 300, 60);
 		contentPane_1.add(btnNewButton_1_1);
 		
 		JButton btnAdd = new JButton("Full History of Patients");
-		btnAdd.setForeground(new Color(0, 0, 0));
+		btnAdd.setForeground(new Color(255, 255, 255));
 		btnAdd.setBackground(new Color(0, 0, 0));
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAdd.setBounds(40, 260, 300, 60);
@@ -97,14 +97,14 @@ public class Home extends JFrame {
 				}
 			}
 		});
-		logoutBtn.setForeground(new Color(0, 0, 0));
+		logoutBtn.setForeground(new Color(255, 255, 255));
 		logoutBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		logoutBtn.setBackground(Color.BLACK);
 		logoutBtn.setBounds(40, 581, 150, 36);
 		contentPane_1.add(logoutBtn);
 		
 		JButton btnHospitalInformation = new JButton("Hospital Information");
-		btnHospitalInformation.setForeground(new Color(0, 0, 0));
+		btnHospitalInformation.setForeground(new Color(255, 255, 255));
 		btnHospitalInformation.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnHospitalInformation.setBackground(Color.BLACK);
 		btnHospitalInformation.setBounds(40, 478, 300, 60);
