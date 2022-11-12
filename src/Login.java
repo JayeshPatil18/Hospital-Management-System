@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
-public class Login extends JFrame implements ActionListener{
+public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -108,8 +108,4 @@ public class Login extends JFrame implements ActionListener{
 		lblWeclomeToHosptial.setBounds(107, 46, 522, 32);
 		contentPane.add(lblWeclomeToHosptial);
 	}
-	public void actionPerformed(ActionEvent e){
-		
-	}
-	
 }
