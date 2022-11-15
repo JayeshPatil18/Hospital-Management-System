@@ -12,7 +12,7 @@ public class ConnectionProvider {
 			
 			String username = "root";
 			String password = "";
-			String url = "jdbc:mysql://localhost:8080/phpmyadmin/hospital_managment_db";
+			String url = "jdbc:mysql://localhost:3306/hospital_managment_db";
 			con = DriverManager.getConnection(url, username, password);
 		}catch(Exception e) {
 			e.printStackTrace();

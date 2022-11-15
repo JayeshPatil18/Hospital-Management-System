@@ -46,7 +46,7 @@ public class addNewPatientRecord extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			};
 		});
 	}
 
@@ -165,23 +165,24 @@ public class addNewPatientRecord extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Connection con = ConnectionProvider.createCon();
-				String query = "insert into patients(p_id, p_name, p_no, p_age, p_gender, p_bGroup, p_address, p_disease) values(?,?,?,?,?,?,?,?)";
+				
+				String query = "insert into patients(p_id,p_name,p_no,p_age,p_gender,p_bGroup,p_address,p_disease) values(?,?,?,?,?,?,?,?)";
 				try {
 					PreparedStatement pstmt = con.prepareStatement(query);
 					
-					String p_id = pId.getText();
+					int p_id = Integer.parseInt(pId.getText());
 					String p_name = pName.getText().toLowerCase();
-					String p_no = pNo.getText();
-					String p_age = pAge.getText();
+					String p_no = pName.getText();
+					int p_age = Integer.parseInt(pAge.getText());
 					String p_gender = "male";
 					String p_bGroup = pBGroup.getText().toLowerCase();
 					String p_address = pAddress.getText().toLowerCase();
 					String p_disease = pDisease.getText().toLowerCase();
-					
-					pstmt.setString(1, p_id);
+//					
+					pstmt.setInt(1, p_id);
 					pstmt.setString(2, p_name);
 					pstmt.setString(3, p_no);
-					pstmt.setString(4, p_age );
+					pstmt.setInt(4, p_age);
 					pstmt.setString(5, p_gender);
 					pstmt.setString(6, p_bGroup);
 					pstmt.setString(7, p_address);
