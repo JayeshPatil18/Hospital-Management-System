@@ -60,7 +60,7 @@ public class addNewPatientRecord extends JFrame {
 	 * Create the frame.
 	 */
 	public addNewPatientRecord() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 700, 652);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -228,6 +228,7 @@ public class addNewPatientRecord extends JFrame {
 							pstmt.setString(8, p_disease);
 							
 							pstmt.executeUpdate();
+							JOptionPane.showMessageDialog(null, "Patient Added!");
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

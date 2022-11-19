@@ -227,7 +227,7 @@ public class UpdatePatientInfo extends JFrame {
 		lblNewLabel_1_1_1.setBounds(115, 389, 458, 27);
 		contentPane.add(lblNewLabel_1_1_1);
 		
-		JButton btnSave = new JButton("Save");
+		JButton btnSave = new JButton("Update");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Connection con = ConnectionProvider.createCon();
@@ -283,6 +283,7 @@ public class UpdatePatientInfo extends JFrame {
 //							pstmt.setString(8, p_disease);
 							
 							pstmt.execute();
+							JOptionPane.showMessageDialog(null, "Details Updated!");
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
