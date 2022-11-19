@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
@@ -64,32 +65,36 @@ public class Home extends JFrame {
 				new addNewPatientRecord().setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(40, 46, 300, 60);
+		btnNewButton.setBounds(40, 46, 300, 79);
 		contentPane_1.add(btnNewButton);
 		
-		JButton btnAddDiagno = new JButton("Add Diagnosis");
-		btnAddDiagno.setForeground(new Color(0, 0, 0));
-		btnAddDiagno.setBackground(new Color(0, 0, 160));
-		btnAddDiagno.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAddDiagno.setBounds(40, 153, 300, 60);
-		contentPane_1.add(btnAddDiagno);
-		
 		JButton btnNewButton_1_1 = new JButton("Update Patient Record");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new UpdatePatientInfo().setVisible(true);
+			}
+		});
 		btnNewButton_1_1.setForeground(new Color(0, 0, 0));
 		btnNewButton_1_1.setBackground(new Color(0, 0, 160));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1_1.setBounds(40, 370, 300, 60);
+		btnNewButton_1_1.setBounds(40, 303, 300, 79);
 		contentPane_1.add(btnNewButton_1_1);
 		
 		JButton btnAdd = new JButton("Full History of Patients");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					new HistoryOfPatients().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAdd.setForeground(new Color(0, 0, 0));
 		btnAdd.setBackground(new Color(0, 0, 160));
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAdd.setBounds(40, 260, 300, 60);
+		btnAdd.setBounds(40, 176, 300, 79);
 		contentPane_1.add(btnAdd);
 		
 		JButton logoutBtn = new JButton("Logout");
@@ -104,14 +109,14 @@ public class Home extends JFrame {
 		logoutBtn.setForeground(new Color(0, 0, 0));
 		logoutBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		logoutBtn.setBackground(new Color(0, 0, 160));
-		logoutBtn.setBounds(40, 581, 150, 36);
+		logoutBtn.setBounds(40, 556, 150, 61);
 		contentPane_1.add(logoutBtn);
 		
 		JButton btnHospitalInformation = new JButton("Hospital Information");
 		btnHospitalInformation.setForeground(new Color(0, 0, 0));
 		btnHospitalInformation.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnHospitalInformation.setBackground(new Color(0, 0, 160));
-		btnHospitalInformation.setBounds(40, 478, 300, 60);
+		btnHospitalInformation.setBounds(40, 431, 300, 79);
 		contentPane_1.add(btnHospitalInformation);
 		
 		JPanel contentPane_1_1 = new JPanel();

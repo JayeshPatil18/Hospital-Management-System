@@ -1,36 +1,31 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import Project.ConnectionProvider;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.HeadlessException;
-
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-
-public class addNewPatientRecord extends JFrame {
+public class UpdatePatientInfo extends JFrame {
 
 	private JPanel contentPane;
+	
 	private JTextField pId;
 	private JTextField pName;
 	private JTextField pNo;
@@ -47,19 +42,19 @@ public class addNewPatientRecord extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					addNewPatientRecord frame = new addNewPatientRecord();
+					UpdatePatientInfo frame = new UpdatePatientInfo();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			};
+			}
 		});
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public addNewPatientRecord() {
+	public UpdatePatientInfo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 652);
 		contentPane = new JPanel();
@@ -88,7 +83,73 @@ public class addNewPatientRecord extends JFrame {
 		pId.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pId.setColumns(10);
 		pId.setBounds(250, 40, 323, 27);
+		pId.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				try {
+					warn();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				try {
+					warn();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+			    try {
+					warn();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+			public void warn() throws SQLException {
+				if(!pId.getText().isEmpty()) {
+					String checkQ = "SELECT COUNT(p_id) FROM patients WHERE p_id = " + pId.getText();
+					Connection con = ConnectionProvider.createCon();
+					PreparedStatement ps = con.prepareStatement(checkQ);
+					ResultSet rs = ps.executeQuery();
+					rs.next();
+					if(rs.getInt(1) == 1) {
+						String query = "select * from patients where p_id = " + pId.getText();
+						ps = con.prepareStatement(query);
+						rs = ps.executeQuery();
+						
+						while(rs.next()) {
+							pName.setText(rs.getString("p_name"));
+							pName.setText(rs.getString("p_name"));
+							pNo.setText(rs.getString("p_no"));
+							pAge.setText(rs.getString("p_age"));
+							pGender.setSelectedItem(rs.getString("p_gender"));
+							pBGroup.setText(rs.getString("p_bGroup"));
+							pAddress.setText(rs.getString("p_address"));
+							pDisease.setText(rs.getString("p_disease"));
+						}
+				
+					}else {					
+						JOptionPane.showMessageDialog(null, "Patient of " + pId.getText() + " is not exist!");
+					}
+				}else {
+					pName.setText("");
+					pNo.setText("");
+					pAge.setText("");
+					pGender.setSelectedItem("");
+					pBGroup.setText("");
+					pAddress.setText("");
+					pDisease.setText("");
+				}
+			}
+		});
 		contentPane.add(pId);
+		
 		
 		JLabel lblName = new JLabel("Name");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -192,11 +253,8 @@ public class addNewPatientRecord extends JFrame {
 				boolean isExist = true;
 				try {
 					rs.next();
-					if(pId.getText().equals("0")) {
-						JOptionPane.showMessageDialog(null, "Id should not be '0', Please use another Id!");
-						isExist = false;
-					}else if(rs.getInt(1) != 0) {
-						JOptionPane.showMessageDialog(null, "This Id is already in use, Please use another Id!");
+					if(rs.getInt(1) != 1) {
+						JOptionPane.showMessageDialog(null, "Patient of " + pId.getText() + " is not exist!");
 						isExist = false;
 					}
 				} catch (HeadlessException | SQLException e2) {
@@ -205,11 +263,7 @@ public class addNewPatientRecord extends JFrame {
 				}
 				
 				if(isExist) {
-						String query = "insert into patients(p_id,p_name,p_no,p_age,p_gender,p_bGroup,p_address,p_disease) values(?,?,?,?,?,?,?,?)";
 						try {
-							PreparedStatement pstmt = con.prepareStatement(query);
-							
-							int p_id = Integer.parseInt(pId.getText());
 							String p_name = pName.getText();
 							String p_no = pName.getText();
 							int p_age = Integer.parseInt(pAge.getText());
@@ -218,16 +272,18 @@ public class addNewPatientRecord extends JFrame {
 							String p_address = pAddress.getText();
 							String p_disease = pDisease.getText();
 							
-							pstmt.setInt(1, p_id);
-							pstmt.setString(2, p_name);
-							pstmt.setString(3, p_no);
-							pstmt.setInt(4, p_age);
-							pstmt.setString(5, p_gender);
-							pstmt.setString(6, p_bGroup);
-							pstmt.setString(7, p_address);
-							pstmt.setString(8, p_disease);
+							String query = "UPDATE patients SET p_name = '" + p_name + "' ,p_no = '" + p_no + "' ,p_age = '" + p_age + "' ,p_gender = '" + p_gender + "' ,p_bGroup = '" + p_bGroup + "' ,p_address = '" + p_address + "' ,p_disease = '" + p_disease + "' WHERE p_id = " + pId.getText();
+							PreparedStatement pstmt = con.prepareStatement(query);
 							
-							pstmt.executeUpdate();
+//							pstmt.setString(2, p_name);
+//							pstmt.setString(3, p_no);
+//							pstmt.setInt(4, p_age);
+//							pstmt.setString(5, p_gender);
+//							pstmt.setString(6, p_bGroup);
+//							pstmt.setString(7, p_address);
+//							pstmt.setString(8, p_disease);
+							
+							pstmt.execute();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -239,4 +295,5 @@ public class addNewPatientRecord extends JFrame {
 		btnSave.setBounds(115, 512, 122, 38);
 		contentPane.add(btnSave);
 	}
+
 }
