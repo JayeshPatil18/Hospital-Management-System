@@ -41,7 +41,7 @@ public class HistoryOfPatients extends JFrame {
 	 * @throws SQLException 
 	 */
 	public HistoryOfPatients() throws SQLException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 717, 659);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

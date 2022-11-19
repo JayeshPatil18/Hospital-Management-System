@@ -57,8 +57,8 @@ public class Home extends JFrame {
 		contentPane.add(contentPane_1);
 		
 		JButton btnNewButton = new JButton("Add Patient");
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color(0, 0, 160));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,8 +74,8 @@ public class Home extends JFrame {
 				new UpdatePatientInfo().setVisible(true);
 			}
 		});
-		btnNewButton_1_1.setForeground(new Color(0, 0, 0));
-		btnNewButton_1_1.setBackground(new Color(0, 0, 160));
+		btnNewButton_1_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1_1.setBackground(new Color(0, 0, 0));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton_1_1.setBounds(40, 303, 300, 79);
 		contentPane_1.add(btnNewButton_1_1);
@@ -91,8 +91,8 @@ public class Home extends JFrame {
 				}
 			}
 		});
-		btnAdd.setForeground(new Color(0, 0, 0));
-		btnAdd.setBackground(new Color(0, 0, 160));
+		btnAdd.setForeground(new Color(255, 255, 255));
+		btnAdd.setBackground(new Color(0, 0, 0));
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAdd.setBounds(40, 176, 300, 79);
 		contentPane_1.add(btnAdd);
@@ -106,16 +106,21 @@ public class Home extends JFrame {
 				}
 			}
 		});
-		logoutBtn.setForeground(new Color(0, 0, 0));
+		logoutBtn.setForeground(new Color(255, 255, 255));
 		logoutBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		logoutBtn.setBackground(new Color(0, 0, 160));
+		logoutBtn.setBackground(new Color(0, 0, 0));
 		logoutBtn.setBounds(40, 556, 150, 61);
 		contentPane_1.add(logoutBtn);
 		
 		JButton btnHospitalInformation = new JButton("Hospital Information");
-		btnHospitalInformation.setForeground(new Color(0, 0, 0));
+		btnHospitalInformation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HospitalInfo().setVisible(true);
+			}
+		});
+		btnHospitalInformation.setForeground(new Color(255, 255, 255));
 		btnHospitalInformation.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnHospitalInformation.setBackground(new Color(0, 0, 160));
+		btnHospitalInformation.setBackground(new Color(0, 0, 0));
 		btnHospitalInformation.setBounds(40, 431, 300, 79);
 		contentPane_1.add(btnHospitalInformation);
 		

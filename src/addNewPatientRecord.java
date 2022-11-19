@@ -196,7 +196,7 @@ public class addNewPatientRecord extends JFrame {
 						JOptionPane.showMessageDialog(null, "Id should not be '0', Please use another Id!");
 						isExist = false;
 					}else if(rs.getInt(1) != 0) {
-						JOptionPane.showMessageDialog(null, "This Id is already in use, Please use another Id!");
+						JOptionPane.showMessageDialog(null, "Id is already in use, Please use another Id!");
 						isExist = false;
 					}
 				} catch (HeadlessException | SQLException e2) {
