@@ -3,13 +3,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Project.ConnectionProvider;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -83,16 +92,54 @@ public class Login extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(username.getText().equals("jayesh")) {
-					if(password.getText().equals("admin")) {
-//						JOptionPane.showConfirmDialog(null, "Logged", "SELECT", JOptionPane.ERROR_MESSAGE);
-						setVisible(false);
-						new Home().setVisible(true);
-					}else {
-						JOptionPane.showConfirmDialog(null, "Wrong Password", "SELECT", JOptionPane.ERROR_MESSAGE);
+				Connection con = ConnectionProvider.createCon();
+				
+				String checkQ = "SELECT COUNT(h_username) FROM hospitals WHERE h_username = " + username.getText();
+				PreparedStatement ps = null;
+				try {
+					ps = con.prepareStatement(checkQ);
+				} catch (SQLException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+				ResultSet rs = null;
+				
+				try {
+					rs = ps.executeQuery();
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				boolean isExist = true;
+				try {
+					rs.next();
+					if(rs.getInt(1) != 1) {
+						JOptionPane.showMessageDialog(null, "Username is not exist!");
+						isExist = false;
 					}
-				}else {
-					JOptionPane.showConfirmDialog(null, "User not exist", "SELECT", JOptionPane.ERROR_MESSAGE);
+				} catch (HeadlessException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				if(isExist) {
+						String query = "select * from hospitals where h_username = " + username.getText();
+						try {
+							PreparedStatement pstmt = con.prepareStatement(query);
+							ResultSet rst = pstmt.executeQuery();
+							
+							rst.next();
+							if(rst.getString("h_password").equals(password.getText())) {
+								new Home().setVisible(true);
+								setVisible(false);
+							}else {
+								JOptionPane.showMessageDialog(null, "Wrong Password!");
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				}
 			}
 		});
@@ -117,6 +164,11 @@ public class Login extends JFrame {
 		btnCreateAccount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCreateAccount.setBounds(135, 292, 168, 34);
 		contentPane.add(btnCreateAccount);
+		btnCreateAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateAccount().setVisible(true);
+			}
+		});
 		
 		lblWeclomeToHosptial = new JLabel("Weclome to Hosptial Managment System");
 		lblWeclomeToHosptial.setHorizontalAlignment(SwingConstants.CENTER);

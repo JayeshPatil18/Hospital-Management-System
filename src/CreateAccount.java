@@ -59,7 +59,7 @@ public class CreateAccount extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateAccount() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 790, 782);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
@@ -170,7 +170,7 @@ public class CreateAccount extends JFrame {
 		contentPane.add(cancelBtn);
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				System.exit(0);
+				setVisible(false);
 			}
 		});
 		
