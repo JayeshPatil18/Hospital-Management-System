@@ -1,7 +1,9 @@
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +12,11 @@ import javax.swing.border.EmptyBorder;
 import Project.ConnectionProvider;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -166,32 +172,66 @@ public class addNewPatientRecord extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Connection con = ConnectionProvider.createCon();
 				
-				String query = "insert into patients(p_id,p_name,p_no,p_age,p_gender,p_bGroup,p_address,p_disease) values(?,?,?,?,?,?,?,?)";
+				String checkQ = "SELECT COUNT(p_id) FROM patients WHERE p_id = " + pId.getText();
+				PreparedStatement ps = null;
 				try {
-					PreparedStatement pstmt = con.prepareStatement(query);
-					
-					int p_id = Integer.parseInt(pId.getText());
-					String p_name = pName.getText().toLowerCase();
-					String p_no = pName.getText();
-					int p_age = Integer.parseInt(pAge.getText());
-					String p_gender = "male";
-					String p_bGroup = pBGroup.getText().toLowerCase();
-					String p_address = pAddress.getText().toLowerCase();
-					String p_disease = pDisease.getText().toLowerCase();
-//					
-					pstmt.setInt(1, p_id);
-					pstmt.setString(2, p_name);
-					pstmt.setString(3, p_no);
-					pstmt.setInt(4, p_age);
-					pstmt.setString(5, p_gender);
-					pstmt.setString(6, p_bGroup);
-					pstmt.setString(7, p_address);
-					pstmt.setString(8, p_disease);
-					
-					pstmt.executeUpdate();
-				} catch (SQLException e1) {
+					ps = con.prepareStatement(checkQ);
+				} catch (SQLException e3) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e3.printStackTrace();
+				}
+				ResultSet rs = null;
+				
+				try {
+					rs = ps.executeQuery();
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				boolean isExist = true;
+				try {
+					rs.next();
+					if(pId.getText().equals("0")) {
+						JOptionPane.showMessageDialog(null, "Id should not be '0', Please use another Id!");
+						isExist = false;
+					}else if(rs.getInt(1) != 0) {
+						JOptionPane.showMessageDialog(null, "This Id is already in use, Please use another Id!");
+						isExist = false;
+					}
+				} catch (HeadlessException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				if(isExist) {
+						String query = "insert into patients(p_id,p_name,p_no,p_age,p_gender,p_bGroup,p_address,p_disease) values(?,?,?,?,?,?,?,?)";
+						try {
+							PreparedStatement pstmt = con.prepareStatement(query);
+							
+							int p_id = Integer.parseInt(pId.getText());
+							String p_name = pName.getText().toLowerCase();
+							String p_no = pName.getText();
+							int p_age = Integer.parseInt(pAge.getText());
+							String p_gender = "male";
+							String p_bGroup = pBGroup.getText().toLowerCase();
+							String p_address = pAddress.getText().toLowerCase();
+							String p_disease = pDisease.getText().toLowerCase();
+							
+							pstmt.setInt(1, p_id);
+							pstmt.setString(2, p_name);
+							pstmt.setString(3, p_no);
+							pstmt.setInt(4, p_age);
+							pstmt.setString(5, p_gender);
+							pstmt.setString(6, p_bGroup);
+							pstmt.setString(7, p_address);
+							pstmt.setString(8, p_disease);
+							
+							pstmt.executeUpdate();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				}
 			}
 		});
