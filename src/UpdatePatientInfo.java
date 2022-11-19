@@ -125,7 +125,6 @@ public class UpdatePatientInfo extends JFrame {
 						
 						while(rs.next()) {
 							pName.setText(rs.getString("p_name"));
-							pName.setText(rs.getString("p_name"));
 							pNo.setText(rs.getString("p_no"));
 							pAge.setText(rs.getString("p_age"));
 							pGender.setSelectedItem(rs.getString("p_gender"));
@@ -265,7 +264,7 @@ public class UpdatePatientInfo extends JFrame {
 				if(isExist) {
 						try {
 							String p_name = pName.getText();
-							String p_no = pName.getText();
+							String p_no = pNo.getText();
 							int p_age = Integer.parseInt(pAge.getText());
 							String p_gender = String.valueOf(pGender.getSelectedItem());
 							String p_bGroup = pBGroup.getText();
