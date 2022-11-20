@@ -131,6 +131,7 @@ public class Login extends JFrame {
 							
 							rst.next();
 							if(rst.getString("h_password").equals(password.getText())) {
+								String t_name = "h" + username.getText().toString();
 								new Home().setVisible(true);
 								setVisible(false);
 							}else {

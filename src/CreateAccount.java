@@ -132,7 +132,7 @@ public class CreateAccount extends JFrame {
 				}
 				
 				if(isExist) {
-						String query = "INSERT INTO hospitals (h_username, h_password, h_name, h_doctors, h_address, h_contact) values(?,?,?,?,?,?)";
+						String query = "INSERT INTO hospitals (h_username, h_password, h_name, h_doctors, h_address, h_contact, h_table) values(?,?,?,?,?,?,?)";
 						try {
 							PreparedStatement pstmt = con.prepareStatement(query);
 							
@@ -142,6 +142,7 @@ public class CreateAccount extends JFrame {
 							String h_doctors = hDoctors.getText();
 							String h_address = hAddress.getText();
 							String h_contact = hContact.getText();
+							String h_table = "h" + username.getText();
 							
 							pstmt.setInt(1, h_username);
 							pstmt.setString(2, h_password);
@@ -149,9 +150,15 @@ public class CreateAccount extends JFrame {
 							pstmt.setString(4, h_doctors);
 							pstmt.setString(5, h_address);
 							pstmt.setString(6, h_contact);
+							pstmt.setString(7, h_table);
 							
 							pstmt.executeUpdate();
 							JOptionPane.showMessageDialog(null, "Hospital Added!");
+							
+							String createQ = "CREATE TABLE h" + h_username + " (p_id int(200) NOT NULL, p_name varchar(20) NOT NULL,p_no varchar(12) NOT NULL,p_age int(100) NOT NULL,p_gender varchar(10) NOT NULL,p_bGroup varchar(10) NOT NULL,p_address varchar(20) NOT NULL,p_disease varchar(20) NOT NULL,PRIMARY KEY (p_id))";
+							pstmt = con.prepareStatement(createQ);
+							pstmt.executeUpdate();
+							
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
