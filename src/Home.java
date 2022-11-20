@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 public class Home extends JFrame {
 
 	private JPanel contentPane;
-	public static String h_table;
+	private static String h_table;
 
 	/**
 	 * Launch the application.
@@ -61,12 +61,13 @@ public class Home extends JFrame {
 		contentPane_1.setBounds(0, 0, 392, 656);
 		contentPane.add(contentPane_1);
 		
-		JButton btnNewButton = new JButton(h_table);
+		JButton btnNewButton = new JButton("Add Patient");
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new addNewPatientRecord(h_table);
 				new addNewPatientRecord().setVisible(true);
 			}
 		});
@@ -76,6 +77,7 @@ public class Home extends JFrame {
 		JButton btnNewButton_1_1 = new JButton("Update Patient Record");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new UpdatePatientInfo(h_table);
 				new UpdatePatientInfo().setVisible(true);
 			}
 		});
@@ -89,6 +91,7 @@ public class Home extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					new HistoryOfPatients(h_table);
 					new HistoryOfPatients().setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -120,7 +123,13 @@ public class Home extends JFrame {
 		JButton btnHospitalInformation = new JButton("Hospital Information");
 		btnHospitalInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HospitalInfo().setVisible(true);
+				new HospitalInfo(h_table);
+				try {
+					new HospitalInfo().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnHospitalInformation.setForeground(new Color(255, 255, 255));

@@ -39,6 +39,8 @@ public class addNewPatientRecord extends JFrame {
 	private JTextField pBGroup;
 	private JTextField pAddress;
 	private JTextField pDisease;
+	
+	private static String h_table;
 
 	/**
 	 * Launch the application.
@@ -59,6 +61,11 @@ public class addNewPatientRecord extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public addNewPatientRecord(String h_table) {
+		this.h_table = h_table;
+	}
+	
 	public addNewPatientRecord() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 700, 652);
@@ -172,7 +179,7 @@ public class addNewPatientRecord extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Connection con = ConnectionProvider.createCon();
 				
-				String checkQ = "SELECT COUNT(p_id) FROM patients WHERE p_id = " + pId.getText();
+				String checkQ = "SELECT COUNT(p_id) FROM " + h_table + " WHERE p_id = " + pId.getText();
 				PreparedStatement ps = null;
 				try {
 					ps = con.prepareStatement(checkQ);
@@ -205,13 +212,13 @@ public class addNewPatientRecord extends JFrame {
 				}
 				
 				if(isExist) {
-						String query = "insert into patients(p_id,p_name,p_no,p_age,p_gender,p_bGroup,p_address,p_disease) values(?,?,?,?,?,?,?,?)";
+						String query = "insert into " + h_table + " (p_id,p_name,p_no,p_age,p_gender,p_bGroup,p_address,p_disease) values(?,?,?,?,?,?,?,?)";
 						try {
 							PreparedStatement pstmt = con.prepareStatement(query);
 							
 							int p_id = Integer.parseInt(pId.getText());
 							String p_name = pName.getText();
-							String p_no = pName.getText();
+							String p_no = pNo.getText();
 							int p_age = Integer.parseInt(pAge.getText());
 							String p_gender = String.valueOf(pGender.getSelectedItem());
 							String p_bGroup = pBGroup.getText();

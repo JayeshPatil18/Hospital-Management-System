@@ -19,6 +19,8 @@ public class HistoryOfPatients extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	
+	private static String h_table;
 
 	/**
 	 * Launch the application.
@@ -40,6 +42,10 @@ public class HistoryOfPatients extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
+	public HistoryOfPatients(String h_table) {
+		this.h_table = h_table;
+	}
+	
 	public HistoryOfPatients() throws SQLException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 717, 659);
@@ -63,7 +69,7 @@ public class HistoryOfPatients extends JFrame {
 		model.addColumn("Patient Address");
 		model.addColumn("Patient Disease");
 		
-		String query = "select * from patients";
+		String query = "select * from " + h_table;
 		Connection con = ConnectionProvider.createCon();
 		PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();

@@ -34,6 +34,8 @@ public class UpdatePatientInfo extends JFrame {
 	private JTextField pBGroup;
 	private JTextField pAddress;
 	private JTextField pDisease;
+	
+	private static String h_table;
 
 	/**
 	 * Launch the application.
@@ -54,6 +56,10 @@ public class UpdatePatientInfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public UpdatePatientInfo(String h_table) {
+		this.h_table = h_table;
+	}
+	
 	public UpdatePatientInfo() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 700, 652);
@@ -113,13 +119,13 @@ public class UpdatePatientInfo extends JFrame {
 			
 			public void warn() throws SQLException {
 				if(!pId.getText().isEmpty()) {
-					String checkQ = "SELECT COUNT(p_id) FROM patients WHERE p_id = " + pId.getText();
+					String checkQ = "SELECT COUNT(p_id) FROM " + h_table + " WHERE p_id = " + pId.getText();
 					Connection con = ConnectionProvider.createCon();
 					PreparedStatement ps = con.prepareStatement(checkQ);
 					ResultSet rs = ps.executeQuery();
 					rs.next();
 					if(rs.getInt(1) == 1) {
-						String query = "select * from patients where p_id = " + pId.getText();
+						String query = "select * from " + h_table + " where p_id = " + pId.getText();
 						ps = con.prepareStatement(query);
 						rs = ps.executeQuery();
 						
@@ -232,7 +238,7 @@ public class UpdatePatientInfo extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Connection con = ConnectionProvider.createCon();
 				
-				String checkQ = "SELECT COUNT(p_id) FROM patients WHERE p_id = " + pId.getText();
+				String checkQ = "SELECT COUNT(p_id) FROM " + h_table + " WHERE p_id = " + pId.getText();
 				PreparedStatement ps = null;
 				try {
 					ps = con.prepareStatement(checkQ);
@@ -271,7 +277,7 @@ public class UpdatePatientInfo extends JFrame {
 							String p_address = pAddress.getText();
 							String p_disease = pDisease.getText();
 							
-							String query = "UPDATE patients SET p_name = '" + p_name + "' ,p_no = '" + p_no + "' ,p_age = '" + p_age + "' ,p_gender = '" + p_gender + "' ,p_bGroup = '" + p_bGroup + "' ,p_address = '" + p_address + "' ,p_disease = '" + p_disease + "' WHERE p_id = " + pId.getText();
+							String query = "UPDATE " + h_table + " SET p_name = '" + p_name + "' ,p_no = '" + p_no + "' ,p_age = '" + p_age + "' ,p_gender = '" + p_gender + "' ,p_bGroup = '" + p_bGroup + "' ,p_address = '" + p_address + "' ,p_disease = '" + p_disease + "' WHERE p_id = " + pId.getText();
 							PreparedStatement pstmt = con.prepareStatement(query);
 							
 //							pstmt.setString(2, p_name);
@@ -283,7 +289,7 @@ public class UpdatePatientInfo extends JFrame {
 //							pstmt.setString(8, p_disease);
 							
 							pstmt.execute();
-							JOptionPane.showMessageDialog(null, "Details Updated!");
+							JOptionPane.showMessageDialog(null, "Patient Details Updated!");
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
