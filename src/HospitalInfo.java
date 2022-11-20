@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class HospitalInfo extends JFrame {
 
@@ -61,13 +62,15 @@ public class HospitalInfo extends JFrame {
 	}
 	
 	public HospitalInfo() throws SQLException {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1000, 570);
+		setBounds(100, 100, 1000, 583);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocation(260,100);
 		
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setBounds(5, 5, 440, 493);
@@ -126,6 +129,8 @@ public class HospitalInfo extends JFrame {
 		contentPane.add(lblNewLabel_1_1_1_1_2);
 		
 		JButton lblNewLabel_1_1_1_1_1_1 = new JButton("Save");
+		lblNewLabel_1_1_1_1_1_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_1_1_1_1_1.setBackground(new Color(0, 0, 0));
 		lblNewLabel_1_1_1_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String query = "UPDATE hospitals SET h_name = ?, h_doctors = ?, h_address = ?, h_contact = ?, h_password = ? WHERE h_table = '" + h_table + "'";
@@ -182,6 +187,8 @@ public class HospitalInfo extends JFrame {
 		contentPane.add(lblNewLabel_1_1_1_1_1_1);
 		
 		JButton lblNewLabel_1_1_1_1_2_1 = new JButton("Close");
+		lblNewLabel_1_1_1_1_2_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_1_1_1_2_1.setBackground(new Color(0, 0, 0));
 		lblNewLabel_1_1_1_1_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);

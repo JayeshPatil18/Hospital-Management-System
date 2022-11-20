@@ -54,6 +54,7 @@ public class HistoryOfPatients extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setLocation(560,80);
 		
 		String []col = {};
 //		String [][]row = {{"Patient Id","Patient Name","Patient Name","Patient Phone no.","Patient Age","Patient Gender","Patient Blood Group","Patient Address","Patient Disease"},

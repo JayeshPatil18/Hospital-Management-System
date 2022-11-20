@@ -59,6 +59,7 @@ public class CreateAccount extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateAccount() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 790, 782);
 		contentPane = new JPanel();
@@ -68,6 +69,7 @@ public class CreateAccount extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocation(370,20);
 		
 		JLabel lblNewLabel = new JLabel("Create Username");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -159,6 +161,8 @@ public class CreateAccount extends JFrame {
 							pstmt = con.prepareStatement(createQ);
 							pstmt.executeUpdate();
 							
+							dispose();
+							
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -166,14 +170,14 @@ public class CreateAccount extends JFrame {
 				}
 			}
 		});
-		createBtn.setBounds(135, 671, 220, 32);
+		createBtn.setBounds(135, 671, 220, 47);
 		contentPane.add(createBtn);
 		
 		cancelBtn = new JButton("Cancel");
 		cancelBtn.setForeground(new Color(255, 255, 255));
 		cancelBtn.setBackground(new Color(0, 0, 0));
 		cancelBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cancelBtn.setBounds(406, 669, 220, 34);
+		cancelBtn.setBounds(406, 669, 220, 49);
 		contentPane.add(cancelBtn);
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){

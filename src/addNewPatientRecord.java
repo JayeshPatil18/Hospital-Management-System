@@ -67,6 +67,7 @@ public class addNewPatientRecord extends JFrame {
 	}
 	
 	public addNewPatientRecord() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 700, 652);
 		contentPane = new JPanel();
@@ -75,8 +76,11 @@ public class addNewPatientRecord extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocation(560,80);
 		
 		JButton btnNewButton = new JButton("Close");
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -175,6 +179,8 @@ public class addNewPatientRecord extends JFrame {
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.setForeground(new Color(255, 255, 255));
+		btnSave.setBackground(new Color(0, 0, 0));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Connection con = ConnectionProvider.createCon();
@@ -236,6 +242,8 @@ public class addNewPatientRecord extends JFrame {
 							
 							pstmt.executeUpdate();
 							JOptionPane.showMessageDialog(null, "Patient Added!");
+							
+							dispose();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
