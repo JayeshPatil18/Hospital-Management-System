@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 public class Home extends JFrame {
 
 	private JPanel contentPane;
+	public static String h_table;
 
 	/**
 	 * Launch the application.
@@ -39,6 +40,10 @@ public class Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public Home(String h_table) {
+		this.h_table = h_table;
+	}
+	
 	public Home() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
@@ -56,7 +61,7 @@ public class Home extends JFrame {
 		contentPane_1.setBounds(0, 0, 392, 656);
 		contentPane.add(contentPane_1);
 		
-		JButton btnNewButton = new JButton("Add Patient");
+		JButton btnNewButton = new JButton(h_table);
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 0, 0));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));

@@ -132,8 +132,11 @@ public class Login extends JFrame {
 							rst.next();
 							if(rst.getString("h_password").equals(password.getText())) {
 								String t_name = "h" + username.getText().toString();
+								
+								new Home(t_name);
 								new Home().setVisible(true);
-								setVisible(false);
+								
+								dispose();
 							}else {
 								JOptionPane.showMessageDialog(null, "Wrong Password!");
 							}
